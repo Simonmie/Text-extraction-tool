@@ -12,6 +12,10 @@ const generateManifestPlugin = () => {
     name: 'generate-manifest',
     apply: 'build',
     async buildStart() {
+      if (isDev) {
+        // watch manifest.js changes
+        this.addWatchFile(r('src/manifest.js'))
+      }
       const dir = r('extension')
       if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
       const m = getManifest()
@@ -32,6 +36,7 @@ const extensionHmrPlugin = () => {
     apply: 'build',
     async buildStart() {
       if (!isDev) return
+      if (server) return
       server = http.createServer((req, res) => {
         if (req.url === '/extension-hmr') {
           res.writeHead(200, {
@@ -85,11 +90,13 @@ export default defineConfig({
     port,
   },
   define: {
-    'globalThis.__EXT_HMR__': JSON.stringify(`http://localhost:${port}/extension-hmr`),
+    'globalThis.__EXT_HMR__': isDev
+      ? JSON.stringify(`http://localhost:${port}/extension-hmr`)
+      : false,
   },
   build: {
     outDir: r('extension/dist'),
-    emptyOutDir: false,
+    emptyOutDir: true,
     sourcemap: isDev ? 'inline' : false,
     terserOptions: {
       mangle: false,

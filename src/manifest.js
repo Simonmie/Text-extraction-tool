@@ -3,8 +3,8 @@ import { isDev, port } from './utils/config'
 export const getManifest = () => {
   const m = {
     manifest_version: 3,
-    name: 'Vue Chrome Extension',
-    version: '0.0.0',
+    name: '字体提取工具',
+    version: '0.0.1',
     icons: {
       16: 'dist/icons/logo-16.png',
       32: 'dist/icons/logo-32.png',
@@ -16,6 +16,8 @@ export const getManifest = () => {
       default_icon: {
         16: 'dist/icons/logo-16.png',
         32: 'dist/icons/logo-32.png',
+        48: 'dist/icons/logo-48.png',
+        128: 'dist/icons/logo-128.png',
       },
     },
     side_panel: { default_path: 'dist/src/sidepanel/index.html' },

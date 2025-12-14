@@ -34,11 +34,7 @@
     <!-- 2. 输入框区域 -->
     <div class="input-section">
       <label>输入需要提取的文字</label>
-      <textarea
-        v-model="inputText"
-        placeholder="在此输入需要保留的字符..."
-        rows="5"
-      ></textarea>
+      <textarea v-model="inputText" placeholder="在此输入需要保留的字符..." rows="5"></textarea>
       <div class="char-count">已选 {{ uniqueCharCount }} 个字符</div>
     </div>
 
@@ -171,7 +167,7 @@ const extractFont = async () => {
     const glyphs = [notdefGlyph]
 
     // Get glyphs for selected characters
-    chars.forEach(char => {
+    chars.forEach((char) => {
       const glyph = font.charToGlyph(char)
       if (glyph && glyph !== notdefGlyph) {
         glyphs.push(glyph)
@@ -185,7 +181,7 @@ const extractFont = async () => {
       unitsPerEm: font.unitsPerEm,
       ascender: font.ascender,
       descender: font.descender,
-      glyphs: glyphs
+      glyphs: glyphs,
     })
 
     newFont.download()
@@ -202,7 +198,7 @@ const extractFont = async () => {
 <style scoped>
 .container {
   padding: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   color: #333;
   max-width: 400px;
   margin: 0 auto;
@@ -225,7 +221,8 @@ const extractFont = async () => {
   margin-bottom: 16px;
 }
 
-.upload-area:hover, .upload-area.dragging {
+.upload-area:hover,
+.upload-area.dragging {
   border-color: #42b983;
   background: #eef9f5;
 }
